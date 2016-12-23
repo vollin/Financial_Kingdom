@@ -1,19 +1,21 @@
 import pickle
 import numpy as np
+from global_init import *
 
 def save2file(varname):
-	filename = "C:\\Python27\\m_data\\%s.dat"%varname
-	f=open(filename,'wb')  
-	eval("pickle.dumps(%s,f)"%varname)
+    filename = "%s%s.dat"%(g.DataHome,varname)
+    f=open(filename,'wb')
+    eval("pickle.dumps(%s,f)"%varname)
 
 def load4file(varname):
-	filename = "C:\\Python27\\m_data\\%s.dat"%varname
-	print(filename)
-	f=open(filename,'rb')
-	return pickle.load(f)
+    filename = "%s%s.dat"%(g.DataHome,varname)
+    print(filename)
+    f=open(filename,'rb')
+    return pickle.load(f)
 
 def kelly(b,p):
-        return (b*p - (1-p))/b
+    return (b*p - (1-p))/b
+
 
 discrete_x_all = load4file("discrete_x_all")
 y_all = load4file("y_all")
@@ -22,19 +24,19 @@ print(len(y_all))
 resX = {}
 resY = {}
 for i in range(1,len(y_all)):
-        s = str(discrete_x_all[i])
-        if s not in resX:
-                resX[s]=1
-        else:
-                resX[s]+=1
-        
-        if s not in resY:
-                resY[s]=0
-        if y_all[i]:
-                resY[s]+=1
+    s = str(discrete_x_all[i])
+    if s not in resX:
+            resX[s]=1
+    else:
+            resX[s]+=1
+    
+    if s not in resY:
+            resY[s]=0
+    if y_all[i]:
+            resY[s]+=1
 
 for s in resX:
-        print "%s\t%d\t%d\t%.2f"%(s,resX[s],resY[s],resY[s]*1.0/resX[s]*100)
+    print "%s\t%d\t%d\t%.2f"%(s,resX[s],resY[s],resY[s]*1.0/resX[s]*100)
 
 #open,morn(1,2),high,low
 info = str([-1,-3,-1,-1])
