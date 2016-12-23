@@ -9,8 +9,8 @@ class Global:
         return s
 
 
-g = Global()
-g.test = True
-g.str = "str"
+def initialize():
+    g = Global()
+    g.Home = "C:\\Python27\\py_code\\Financial_Kingdom\\"
+    g.DataHome = g.Home + "m_data\\"
 
-print g
